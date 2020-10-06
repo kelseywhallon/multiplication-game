@@ -22,7 +22,7 @@ startGameButton.addEventListener('click', startGame = () => {
         document.querySelector('.start-reset').innerHTML = "Reset Game"
         //start the timer
         // startTimer()
-        setTime()
+        // setTime()
         //show level 
 
         //show timer
@@ -32,45 +32,69 @@ startGameButton.addEventListener('click', startGame = () => {
     }
 })
 
+//change level to 1 once game is started
 
 //timer function
-function setTime(timeRemaining){
-    //set the interval
-    time = timeRemaining
-    const timeInterval = setInterval(() => {
-        //create a check to stop at 0
-        if (time === 0) {
-            //clear the interval
-            clearInterval(timeInterval)
-            //remove eventListerner on start button?
+// function setTime(timeRemaining) {
+//     //set the interval
+//     time = timeRemaining
+//     let timeInterval = setInterval(() => {
+//         //create a check to stop at 0
+//         if (time === 0) {
+//             //clear the interval
+//             clearInterval(timeInterval)
+//             //remove eventListerner on start button?
+//             startGameButton.removeEventListener('click', startGame)
+//             //increase the level player is currently on
+//             level++
+//         } else {
+//             //decrement timer--
+//             time--
+//             console.log(time)
+//         }
+//     }, 1000)
+//     const updateTime = document.getElementById('time')
+//     updateTime.innerHTML = `Time: ${time}s`
+// }
 
-            //increase the level player is currently on
-            // level++
-
-        } else {
-            //decrement timer--
-            time--
-            console.log(time)
-        }   
-    },1000) 
-    const updateTime = document.querySelector('.time-remaining')
-    updateTime.innerHTML = `Time: ${time}s`  
-    gameContainer.appendChild.updateTime
-}
-
-//change level to 1 once game is started
 
 
 //fill question box with 2 random numbers
 function newQA() {
-    let num1 = Math.floor(Math.random() * 9)
-    let num2 = Math.floor(Math.random() * 9)
+    let num1 = Math.floor(1 + Math.random() * 9)
+    let num2 = Math.floor(1 + Math.random() * 9)
     //define the correct answer
     let correctAnswer = num1 * num2
     document.querySelector('.question-box').innerHTML = `${num1} x ${num2}`
     //define correct square of correct answer
-    let correctSquare = Math.floor(Math.random() * 4)
+    //assign the correct answer a random index
+    let correctAnswerIndex = Math.floor(Math.random() * 4)
+    document.getElementById('box'+ `${correctAnswerIndex}`).innerHTML = correctAnswer
+
+
+    //fill one of the answer boxes with the correct answer
+    //fill the remainder boxes with incorrect answers
+    //create an array for 4 answers
+    let answers = [correctAnswer]
+    //loop through the answer boxes and assign random index positions to wrong answers
+    for (i = 1; i < 5; i++) {
+        if (i !== correctAnswerIndex) {
+            do {
+                //create an inccorect answer
+                wrongAnswer = (1 + Math.floor(Math.random() * 9)) * (1 + Math.floor(Math.random() * 9))
+            }
+            while (answers.indexOf(wrongAnswer) > -1)
+            let wrongAnswerBoxes = document.querySelectorAll('.answer-box')
+            wrongAnswerBoxes.innerHTML = `wrongAnswer${i}`
+            answers.push(wrongAnswer)
+        }
+    }
 }
+
+
+
+
+
 //fill answer boxes with random numbers
 //make sure one of these numbers is the correct answer
 //shuffle the position of the correct answer each round
