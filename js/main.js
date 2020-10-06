@@ -6,31 +6,34 @@ let playGame = false
 let score = 0
 //set timer to 60 seconds
 let time = 10
+let level = 0
+let correctAnswer = 0
 
 const gameContainer = document.querySelector('.game-container')
-
 
 //create start game button to initiate game
 const startGameButton = document.querySelector('.start-reset')
 startGameButton.addEventListener('click', startGame = () => {
     if (playGame === true) {
         //if game is already being played reload to start page
-        document.reload()
+        // location.reload()
     } else {
         //when game is initiated 
         //change start button to "reset game"
+        playGame = true
         document.querySelector('.start-reset').innerHTML = "Reset Game"
         //start the timer
         // startTimer()
         setTime(10)
         //show level 
-
+        document.getElementById('level-box').innerHTML = `Level: ${level += 1}`
         //show timer
 
         //generate a question and answers
         newQA()
     }
 })
+
 
 //change level to 1 once game is started
 
@@ -44,7 +47,7 @@ function setTime(timeRemaining) {
             //clear the interval
             clearInterval(timeInterval)
             //remove eventListerner on start button?
-            startGameButton.removeEventListener('click', startGame)
+            // startGameButton.removeEventListener('click', startGame)
             //increase the level player is currently on
 
         } else {
@@ -59,28 +62,46 @@ function setTime(timeRemaining) {
 }
 
 
+//loop through answer-boxes and add click event 
+for (i = 1; i < 5; i++) {
+    const answerButtons = document.getElementById('box' + `${i}`)
+    answerButtons.addEventListener('click', function chooseAnswer(event) {
+        console.log('innerHTML ', event.target.innerHTML)
+        console.log(playGame)
+        if (playGame === true) {
+            console.log(typeof event.target.innerHTML)
+            console.log(correctAnswer)
+            if (parseInt(event.target.innerHTML) === correctAnswer) {
+                console.log('good job!')
+                score++
+                document.getElementById('score').innerHTML = `Score: ${score}`
+                newQA()
+            } else {
+                alert("TRY AGAIN!")
+            }
+        }
+    })
+}
+
 
 //fill question box with 2 random numbers
 function newQA() {
     let num1 = Math.floor(1 + Math.random() * 9)
     let num2 = Math.floor(1 + Math.random() * 9)
     //define the correct answer
-    let correctAnswer = num1 * num2
+    correctAnswer = num1 * num2
     document.querySelector('.question-box').innerHTML = `${num1} x ${num2}`
     //define correct square of correct answer
     //assign the correct answer a random index
-    let correctAnswerIndex = Math.floor(Math.random() * 4)
-    document.getElementById('box' + `${correctAnswerIndex}`).innerHTML = correctAnswer
-
-
-    //fill one of the answer boxes with the correct answer
-    //fill the remainder boxes with incorrect answers
-    //create an array for 4 answers
+    let correctAnswerBox = (1 + Math.floor(Math.random() * 4))
+    document.getElementById('box' + `${correctAnswerBox}`).innerHTML = correctAnswer
+    console.log(correctAnswer)
+    console.log(correctAnswerBox)
 
     //loop through the answer boxes and assign random index positions to wrong answers
     for (i = 1; i < 5; i++) {
         console.log('on loop: ', i)
-        if (i !== correctAnswerIndex) {
+        if (i !== correctAnswerBox) {
             //create an inccorect answer
             wrongAnswer = (1 + Math.floor(Math.random() * 9)) * (1 + Math.floor(Math.random() * 9))
 
@@ -89,13 +110,6 @@ function newQA() {
     }
 }
 
-
-
-
-
-//fill answer boxes with random numbers
-//make sure one of these numbers is the correct answer
-//shuffle the position of the correct answer each round
 
 //if player chooses incorrect answer - try again message appears
 
