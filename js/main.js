@@ -6,7 +6,9 @@ let playGame = false
 let score = 0
 //set timer to 60 seconds
 let time = 10
-let level = 0
+//level starts at 0
+let level = 1
+//set correct answer to a global variable
 let correctAnswer = 0
 
 const gameContainer = document.querySelector('.game-container')
@@ -24,11 +26,11 @@ startGameButton.addEventListener('click', startGame = () => {
         document.querySelector('.start-reset').innerHTML = "Reset Game"
         //start the timer
         // startTimer()
-        setTime(10)
+        // setTime(10)
         //show level 
-        document.getElementById('level-box').innerHTML = `Level: ${level += 1}`
+        document.getElementById('level-box').innerHTML = `Level: ${level}`
         //show timer
-
+        setUpLevels()
         //generate a question and answers
         newQA()
     }
@@ -37,20 +39,35 @@ startGameButton.addEventListener('click', startGame = () => {
 
 //change level to 1 once game is started
 
+
+
 // timer function
 function setTime(timeRemaining) {
     //set the interval
     time = timeRemaining
     let timeInterval = setInterval(() => {
         //create a check to stop at 0
-        if (time === 0) {
+        if (time === 0 && level === 3) {
+            //game over pop up
+            alert("GAME OVER!!")
             //clear the interval
             clearInterval(timeInterval)
-            //remove eventListerner on start button?
-            // startGameButton.removeEventListener('click', startGame)
+        } else if (time === 0) {
+            //game over pop up
+            alert("Time's Up!!")
+            //clear the interval
+            clearInterval(timeInterval)   
+            //change button to "Next Level"
+            document.querySelector('.start-reset').innerHTML = "Next Level"
             //increase the level player is currently on
+            document.getElementById('level-box').innerHTML = `Level: ${level}`
+            document.querySelector('.start-reset').onclick = function() {
+                newQA()
+            }
 
         } else {
+            
+            
             //decrement timer--
             time--
             console.log(time)
@@ -61,6 +78,19 @@ function setTime(timeRemaining) {
 
 }
 
+function setUpLevels() {
+    if(level === 1) {
+        setTime(10)
+        level++
+    } else if (level === 2) {
+        setTime(10)
+        level++
+    } else if (level === 3) {
+        setTime(10)
+    } else {
+        alert("GAME OVER!")
+    }
+}
 
 //loop through answer-boxes and add click event 
 for (i = 1; i < 5; i++) {
