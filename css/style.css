@@ -13,17 +13,17 @@
     position: relative;
 }
 
-#timer {
+/* #timer {
     display: inline-block; 
-}
+} */
 
-#level-box {
+/* #level-box {
     display: block;
-}
+} */
 
-#score {
+/* #score {
     display: block;
-} 
+}  */
 
 .question-box {
     display: flex;
