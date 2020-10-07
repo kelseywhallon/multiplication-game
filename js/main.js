@@ -6,40 +6,44 @@ let playGame = false
 let score = 0
 //set timer to 60 seconds
 let time = 10
-//level starts at 0
+//level starts at 1 when game begins
 let level = 1
 //set correct answer to a global variable
 let correctAnswer = 0
 
-const gameContainer = document.querySelector('.game-container')
 
+function startGame() {
+    //when game is initiated 
+    //change start button to "reset game"
+    playGame = true
+    document.querySelector('.start-reset').innerHTML = "Reset Game"
+
+    //show level
+        document.getElementById('level-box').innerHTML = `Level: ${level}`
+    //show timer
+    setUpLevels()
+    //generate a question and answers
+    newQA()
+}
 //create start game button to initiate game
 const startGameButton = document.querySelector('.start-reset')
-startGameButton.addEventListener('click', startGame = () => {
+startGameButton.addEventListener('click', startGame)
+
+//create button for player to skip a question
+const skipQuestionBtn = document.querySelector('.skip-question')
+function skipQuestion() {
     if (playGame === true) {
-        //if game is already being played reload to start page
-        // location.reload()
-    } else {
-        //when game is initiated 
-        //change start button to "reset game"
-        playGame = true
-        document.querySelector('.start-reset').innerHTML = "Reset Game"
-        //start the timer
-        // startTimer()
-        // setTime(10)
-        //show level 
-        document.getElementById('level-box').innerHTML = `Level: ${level}`
-        //show timer
-        setUpLevels()
-        //generate a question and answers
         newQA()
+    } else {
+        skipQuestionBtn.removeEventListener('click', skipQuestion)
     }
-})
 
+}
 
-//change level to 1 once game is started
-
-
+//stop game / reset game function so player can restart at beginning
+function resetGame() {
+    location.reload()
+}
 
 // timer function
 function setTime(timeRemaining) {
@@ -47,50 +51,61 @@ function setTime(timeRemaining) {
     time = timeRemaining
     let timeInterval = setInterval(() => {
         //create a check to stop at 0
-        if (time === 0 && level === 3) {
+        if (level === 3 && time === 0) {
             //game over pop up
-            alert("GAME OVER!!")
             //clear the interval
             clearInterval(timeInterval)
+            //change innerHTML of button
+            startGameButton.innerHTML = "Start New Game"
+            //give player option to restart a new game
+            startGameButton.addEventListener('click', startGame)
+            //make sure player cannot reload another question
+            skipQuestionBtn.removeEventListener('click', skipQuestion)
+
         } else if (time === 0) {
             //game over pop up
             alert("Time's Up!!")
+            //make sure player cannot click skip question
+            skipQuestionBtn.removeEventListener('click', skipQuestion)
             //clear the interval
-            clearInterval(timeInterval)   
+            clearInterval(timeInterval)
             //change button to "Next Level"
             document.querySelector('.start-reset').innerHTML = "Next Level"
             //increase the level player is currently on
-            document.getElementById('level-box').innerHTML = `Level: ${level}`
-            document.querySelector('.start-reset').onclick = function() {
-                newQA()
+            document.querySelector('.start-reset').onclick = function () {
+                
+                    newQA()
+                
+                
+                
             }
-
+            document.getElementById('level-box').innerHTML = `Level: ${level}`
+            //remove event listener from answer boxes
+            // document.querySelectorAll('.answer-box').removeEventListener('click', chooseAnswer(eventObject))
         } else {
-            
-            
             //decrement timer--
             time--
             console.log(time)
             const updateTime = document.getElementById('time')
             updateTime.innerHTML = `Time: ${time} s`
+            //be able to click on reset game
+            startGameButton.addEventListener('click', resetGame)
+            //be able to skip questions
+            skipQuestionBtn.addEventListener('click', skipQuestion)
         }
     }, 1000)
-
 }
 
 function setUpLevels() {
-    if(level === 1) {
-        setTime(10)
-        level++
+    if (level === 1) {
+        setTime(5)
     } else if (level === 2) {
         setTime(10)
-        level++
     } else if (level === 3) {
-        setTime(10)
-    } else {
-        alert("GAME OVER!")
+        setTime(15)
     }
 }
+
 
 //loop through answer-boxes and add click event 
 for (i = 1; i < 5; i++) {
@@ -134,22 +149,9 @@ function newQA() {
         if (i !== correctAnswerBox) {
             //create an inccorect answer
             wrongAnswer = (1 + Math.floor(Math.random() * 9)) * (1 + Math.floor(Math.random() * 9))
-
-            document.getElementById('box' + `${i}`).innerHTML = wrongAnswer
+            if (wrongAnswer !== correctAnswer) {
+                document.getElementById('box' + `${i}`).innerHTML = wrongAnswer
+            }
         }
     }
 }
-
-
-//if player chooses incorrect answer - try again message appears
-
-//if player chooses the correct answer new round of questions/answers appears
-//if player chooses correct answer increase score++
-
-//once timer runs out "game over" box appears
-//change button to "Next Level" or at last level change to "Start Game"
-
-
-
-
-
