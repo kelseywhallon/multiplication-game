@@ -46,6 +46,7 @@ const skipQuestionBtn = document.querySelector('.skip-question')
 function skipQuestion() {
     if (playGame === true) {
         newQA()
+        document.getElementById('try-again').style.display = "none"
     }
 }
 //next level button when time is at 0
@@ -148,6 +149,10 @@ function chooseAnswer(event) {
         } else {
             // if player chooses incorrect answer show try again window 
             document.getElementById('try-again').style.display = "inline-block"
+            //decrease score by 1
+            score--
+            //update innerHTML of score
+            document.getElementById('score').innerHTML = `Score: ${score}`
         }
     }
 }
