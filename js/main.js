@@ -22,10 +22,14 @@ function startGame() {
     gameContainer.removeChild(startGameButton)
 
     //show level
+    document.getElementById('level-box').style.display = "inline-block"
     document.getElementById('level-box').innerHTML = `Level: ${level}`
     //show timer
     setUpLevels()
+    document.getElementById('time').style.display = "inline-block"
     document.getElementById('time').innerHTML = `Time: ${time} s`
+
+    document.getElementById('score').style.display = "inline-block"
 
     //generate a question and answers
     newQA()
@@ -54,6 +58,7 @@ function skipQuestion() {
 newGameButton.addEventListener('click', resetGame)
 
 function moveToNextLevel() {
+    document.getElementById('next-level-alert').style.display = "none"
     level++
     document.getElementById('level-box').innerHTML = 'Level: ' + level
     setUpLevels()
@@ -67,13 +72,13 @@ function resetGame() {
 function setUpLevels() {
     if (level === 1) {
         console.log(`level:  ${level}`)
-        setTime(5)
+        setTime(40)
     } else if (level === 2) {
         console.log(`level:  ${level}`)
-        setTime(10)
+        setTime(20)
     } else if (level === 3) {
         console.log(`level:  ${level}`)
-        setTime(15)
+        setTime(10)
     }
 }
 
@@ -85,7 +90,8 @@ function setTime(timeRemaining) {
         //create a check to stop at 0
         if (level === 3 && time === 0) {
             //game over pop 
-            alert("GAME OVER!! ")
+            document.getElementById('game-over').style.display = "inline-block"
+            document.getElementById('game-over').innerHTML = `GAME OVER! <br /> Your score is: ${score}`
             //clear the interval
             clearInterval(timeInterval)
             removeAnswerBtn()
@@ -104,7 +110,7 @@ function setTime(timeRemaining) {
             skipQuestionBtn.style.display = 'none'
             removeAnswerBtn()
             //Time's Up alert
-            alert("Time's Up!!")
+            document.getElementById('next-level-alert').style.display = "inline-block"
 
             //show next level button
             nextLevelBtn.style.display = 'block'
