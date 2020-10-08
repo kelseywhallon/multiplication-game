@@ -88,11 +88,13 @@ function setTime(timeRemaining) {
             alert("GAME OVER!! ")
             //clear the interval
             clearInterval(timeInterval)
+            removeAnswerBtn()
             //remove skip question button
             skipQuestionBtn.style.display = 'none'
             //have button reset game
             newGameButton.addEventListener('click', resetGame)
             newGameButton.style.display = 'block'
+
 
         } else if (time === 0) {
             //clear the interval
@@ -100,6 +102,7 @@ function setTime(timeRemaining) {
             //hide skip quetion button
             //make sure player cannot click skip question and hide button
             skipQuestionBtn.style.display = 'none'
+            removeAnswerBtn()
             //Time's Up alert
             alert("Time's Up!!")
 
@@ -117,27 +120,39 @@ function setTime(timeRemaining) {
 }
 
 
-//loop through answer-boxes and add click event 
-for (i = 1; i < 5; i++) {
-    const answerButtons = document.getElementById('box' + `${i}`)
-    answerButtons.addEventListener('click', function chooseAnswer(event) {
-        console.log('innerHTML ', event.target.innerHTML)
-        console.log(playGame)
-        if (playGame === true) {
-            console.log(typeof event.target.innerHTML)
-            console.log(correctAnswer)
-            if (parseInt(event.target.innerHTML) === correctAnswer) {
-                // alert('CORRECT')
-                console.log('good job!')
-                score++
-                document.getElementById('score').innerHTML = `Score: ${score}`
-                newQA()
-            } else {
-                alert("TRY AGAIN!")
-            }
+function chooseAnswer(event) {
+    console.log('innerHTML ', event.target.innerHTML)
+    console.log(playGame)
+    if (playGame === true) {
+        console.log(typeof event.target.innerHTML)
+        console.log(correctAnswer)
+        if (parseInt(event.target.innerHTML) === correctAnswer) {
+            // alert('CORRECT')
+            document.getElementById('try-again').style.display = 'none'
+            console.log('good job!')
+            score++
+            document.getElementById('score').innerHTML = `Score: ${score}`
+            newQA()
+        } else {
+            document.getElementById('try-again').style.display = "inline-block"
         }
-    })
+    }
 }
+//loop through answer-boxes and add click event 
+function addAnswerBtn() {
+    for (i = 1; i < 5; i++) {
+        const answerButtons = document.getElementById('box' + `${i}`)
+        answerButtons.addEventListener('click', chooseAnswer)
+    }
+}
+
+function removeAnswerBtn() {
+    for (i = 1; i < 5; i++) {
+        const answerButtons = document.getElementById('box' + `${i}`)
+        answerButtons.removeEventListener('click', chooseAnswer)
+    }
+}
+
 
 
 //fill question box with 2 random numbers
@@ -145,7 +160,7 @@ function newQA() {
     nextLevelBtn.style.display = 'none'
     skipQuestionBtn.style.display = 'block'
     skipQuestionBtn.addEventListener('click', skipQuestion)
-
+    addAnswerBtn()
     let num1 = Math.floor(1 + Math.random() * 12)
     let num2 = Math.floor(1 + Math.random() * 12)
     //define the correct answer
