@@ -13,17 +13,19 @@
     position: relative;
 }
 
-/* #timer {
-    display: inline-block; 
-} */
 
-/* #level-box {
-    display: block;
-} */
 
-/* #score {
-    display: block;
-}  */
+#try-again {
+    height: 200px;
+    width: 200px;
+    display: none;
+}
+
+#game-over{
+    height: 200px;
+    width: 200px;
+    display: none;
+}
 
 .question-box {
     display: flex;
@@ -60,3 +62,14 @@
     margin: 10px;
 }
 
+.skip-question {
+    display: none;
+}
+
+.next-level {
+    display: none;
+}
+
+.reset-game {
+    display: none;
+}
