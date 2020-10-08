@@ -90,7 +90,9 @@ function setTime(timeRemaining) {
     let timeInterval = setInterval(() => {
         //create a check to stop at 0
         if (level === 3 && time === 0) {
-            //game over pop 
+            //hide any potential try-again messages
+            document.getElementById('try-again').style.display = "none"
+             //game over pop 
             document.getElementById('game-over').style.display = "inline-block"
             document.getElementById('game-over').innerHTML = `GAME OVER! <br /> Your score is: ${score}`
             //clear the interval
@@ -105,6 +107,8 @@ function setTime(timeRemaining) {
             //clear the interval
             clearInterval(timeInterval)
             //make sure player cannot click skip question and hide button
+            //hide any potential try-again messages
+            document.getElementById('try-again').style.display = "none"
             skipQuestionBtn.style.display = 'none'
             //remove event listener on answer buttons
             removeAnswerBtn()
@@ -194,7 +198,7 @@ function newQA() {
             wrongAnswer = (1 + Math.floor(Math.random() * 12)) * (1 + Math.floor(Math.random() * 12))
             //if the random num does not equal the correct answer assign it to a wrong answer box
             if (wrongAnswer !== correctAnswer) {
-                    document.getElementById('box' + `${i}`).innerHTML = wrongAnswer
+                document.getElementById('box' + `${i}`).innerHTML = wrongAnswer
             }
         }
     }
