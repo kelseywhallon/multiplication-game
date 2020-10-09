@@ -40,7 +40,7 @@ As a kid, I always loved taking timed multiplication (times tables) quizes and t
 
 
 ### Technologies & code Snippets
-A particular portion of my code that I am pround of is my random question and and answers generator.
+A particular portion of my code that I am pround of is my random question and and answers generator. This particular section was challenging for me to populate the correct answer in a random square each new question/ answer is generated. 
 
 ```
 
