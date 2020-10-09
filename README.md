@@ -69,7 +69,7 @@ function newQA() {
 
 ```
 
-### Future Developments
+## Future Developments
 For future developements on this game, I would like to add to the levels. My goal is to add to the random number generator functionality and add additional challenges to each of the levels. Eventually, my idea is to have Level 1 generating 2 single digit numbers, level 2 generating 1 single digit number and 1 double digit number, and finally having 2 double digit numbers in level 3. Additional levels after level 3 can increase by 10s. (20, 30, 40, etc). 
 
 As I continue to add to the insentiy of each level, I want to change the point scoring functionality as well. As the challenge of each level increases, the points will increase as well. 
@@ -95,5 +95,8 @@ As I continue to add to the insentiy of each level, I want to change the point s
 **Fabicon Icon**
 [https://www.favicon-generator.org/]
 
+
+## Visit the site live here: 
+[https://pages.git.generalassemb.ly/kelseywhallon/project1/]
 
 
