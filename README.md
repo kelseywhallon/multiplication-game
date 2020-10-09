@@ -39,7 +39,7 @@ As a kid, I always loved taking timed multiplication (times tables) quizes and t
 - At the game over stage of the game, The "Next Level" button will then become a "Start New Game" button and the player will have the option to initiate a new game. 
 
 
-### Technologies & code Snippets
+### Technologies & Code Snippets
 A particular portion of my code that I am pround of is my random question and and answers generator. This particular section was challenging for me to populate the correct answer in a random square each new question/ answer is generated. 
 
 ```
