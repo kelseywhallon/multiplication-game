@@ -5,7 +5,7 @@ This is a game built to test your multiplication skills!
 
 Once the game begins, two randomly generated numbers will appear in the question box and four randomly generated numbers will populate each of the answer boxes. One of the answer boxes will contain the correct answer and every time a new question is populated the correct answer will appear in a randomly selected answer box. Each time the player selects the correct answer their score will increase by 1 and a new question will appear. If the player selects an incorrect answer, a "Try Again" message will appear and the player's score will decrease by 1. The player has the opportunity to choose again on this same question until they select the right answer, but each time they continue to click on an incorrect answer their score will decrease by 1. The player's goal is to answer as many questions correctly as they can in the alotted time given to them each on each level. Level 1 is 40 seconds, level 2 is 20 seconds, and level 3 is 10 seconds. Once the timer hits 0 at the end of level 3, a "Game Over" message will appear with the player's final score. The player will have the option to start a new game. 
 
-ry it live [here] (https://reverent-kare-d49434.netlify.app/)
+[Try it live](https://reverent-kare-d49434.netlify.app/)
 
 
 ## Motivation
